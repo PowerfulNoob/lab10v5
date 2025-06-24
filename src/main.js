@@ -22,13 +22,16 @@ async function getArticles() {
     .select('title', 'subtitle', 'author', 'created_at', 'content')
     .order(column, { ascending: direction === 'asc' })
 
+
+
   let htmlArticles = ''
   article.forEach((item) => {
+    let formattedDate = item.created_at ? format(new Date(item.created_at), 'dd-MM-yyyy') : 'Nieznana data';
     htmlArticles += `<div class="article">
       <h3>Tytuł: ${item.title}</h3>
       <h4>Podtytuł: ${item.subtitle}</h4>
       <h5>Autor: ${item.author}</h5>
-      <h5>Data utworzenia: ${format(new Date(item.created_at), 'dd-MM-yyyy')}</h5>
+      <h5>Data utworzenia: ${formattedDate}</h5>
       <p>Treść:${item.content}</p>
     </div>`;
   });
