@@ -19,7 +19,7 @@ async function getArticles() {
 
   let { data: article, error } = await supabase
     .from('article')
-    .select('title', 'subtitle', 'author', 'created_at', 'content')
+    .select('title, subtitle, author, created_at, content')
     .order(column, { ascending: direction === 'asc' })
 
 
