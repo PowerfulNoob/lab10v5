@@ -3,22 +3,27 @@ import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1 class="text-2xl font-bold text-primary">Hello Vite!</h1>
-    <div class="card">
-      <button class="bg-blue-300 p-4" id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
 
-setupCounter(document.querySelector('#counter'))
+// const appDiv = document.getElementById('app')
+// appDiv.innerHTML = `
+// <main>
+//   <h1>Lab 12</h1>
+//   <select id="order-select">
+//     <option value="asc">Data - rosnąco</option>
+//     <option value="desc">Data - malejąco</option>
+//     <option value="name-asc">Nazwa - alfabetycznie</option>
+//   </select>
+
+//   <div id="container"></div>>
+
+//   <h2>Dodaj artykuł</h2>
+//   <form id="article-form">
+//     <input type="text" id="title" placeholder="Tytuł" required />
+//     <input type="text" id="subtitle" placeholder="Podtytuł" required />
+//     <input type="text" id="author" placeholder="Autor" required />
+//     <textarea id="content" placeholder="Treść" required></textarea>
+//     <input type="date" id="created_at" required />
+//     <button type="submit">OK</button>
+//   </form>
+// </main>
+// `
