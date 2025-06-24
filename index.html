@@ -20,13 +20,19 @@
     <div id="container" class="max-w-4xl mx-auto space-y-6 mt-8"></div>
 
     <h2>Dodaj artykuł</h2>
-    <form id="article-form">
-      <input type="text" name="title" id="title" placeholder="Tytuł" required />
-      <input type="text" name="subtitle" id="subtitle" placeholder="Podtytuł" required />
-      <input type="text" name="author" id="author" placeholder="Autor" required />
-      <textarea name="content" id="content" placeholder="Treść" required></textarea>
-      <input type="date" name="created_at" id="created_at" required />
-      <button type="submit">OK</button>
+    <form id="article-form" class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-4">
+      <input type="text" name="title" id="title" placeholder="Tytuł" required
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      <input type="text" name="subtitle" id="subtitle" placeholder="Podtytuł" required
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      <input type="text" name="author" id="author" placeholder="Autor" required
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      <textarea name="content" id="content" placeholder="Treść" required
+        class="w-full px-4 py-2 border border-gray-300 rounded resize-y focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+      <input type="date" name="created_at" id="created_at" required
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      <button type="submit"
+        class="w-full bg-indigo-600 text-white font-semibold py-2 rounded hover:bg-indigo-700 transition">OK</button>
     </form>
   </div>
   <script type="module" src="/src/main.js"></script>
