@@ -32,7 +32,7 @@ async function getArticles() {
       <h4 class="text-md font-medium text-gray-700 mb-1">Podtytuł: ${item.subtitle}</h4>
       <h5 class="text-sm text-gray-500 mb-1">Autor: ${item.author}</h5>
       <h5 class="text-sm text-gray-400 mb-3">Data utworzenia: ${formattedDate}</h5>
-      <p class="text-gray-800">Treść:${item.content}</p>
+      <p class="text-gray-800">Treść: ${item.content}</p>
     </div>`;
   });
 
