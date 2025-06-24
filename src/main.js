@@ -3,27 +3,67 @@ import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://pvcimhnfgiravzozqtdq.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Y2ltaG5mZ2lyYXZ6b3pxdGRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA2NTU2MDgsImV4cCI6MjA2NjIzMTYwOH0.UhWz0o62sCSxBuxhU8N_t7kB_HtehYQdY8MrMBL4CyI'
+const supabase = createClient(supabaseUrl, supabaseKey)
+import { format } from 'date-fns';
 
-// const appDiv = document.getElementById('app')
-// appDiv.innerHTML = `
-// <main>
-//   <h1>Lab 12</h1>
-//   <select id="order-select">
-//     <option value="asc">Data - rosnąco</option>
-//     <option value="desc">Data - malejąco</option>
-//     <option value="name-asc">Nazwa - alfabetycznie</option>
-//   </select>
+async function getArticles() {
+  let container = document.querySelector('#container')
+  let orderSelect = document.querySelector('#order-select')
+  let sortOrder = orderSelect ? orderSelect.value : 'created_at.desc';
+  let [column, direction] = sortOrder.split('.');
 
-//   <div id="container"></div>>
+  let { data: article, error } = await supabase
+    .from('article')
+    .select('title', 'subtitle', 'author', 'created_at', 'content')
+    .order(column, { ascending: direction === 'asc' })
 
-//   <h2>Dodaj artykuł</h2>
-//   <form id="article-form">
-//     <input type="text" id="title" placeholder="Tytuł" required />
-//     <input type="text" id="subtitle" placeholder="Podtytuł" required />
-//     <input type="text" id="author" placeholder="Autor" required />
-//     <textarea id="content" placeholder="Treść" required></textarea>
-//     <input type="date" id="created_at" required />
-//     <button type="submit">OK</button>
-//   </form>
-// </main>
-// `
+  let htmlArticles = ''
+  article.forEach((item) => {
+    htmlArticles += `<div class="article">
+      <h3>Tytuł: ${item.title}</h3>
+      <h4>Podtytuł: ${item.subtitle}</h4>
+      <h5>Autor: ${item.author}</h5>
+      <h5>Data utworzenia: ${format(new Date(item.created_at), 'dd-MM-yyyy')}</h5>
+      <p>Treść:${item.content}</p>
+    </div>`;
+  });
+
+  container.innerHTML = htmlArticles
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  getArticles()
+
+  const articleForm = document.querySelector('#article-form');
+  articleForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(articleForm);
+    const title = formData.get('title');
+    const subtitle = formData.get('subtitle');
+    const author = formData.get('author');
+    const content = formData.get('content');
+    const created_at = new Date(formData.get('created_at')).toISOString();
+
+    const { data, error } = await supabase
+      .from('article')
+      .insert([{ title, subtitle, author, content, created_at }]);
+
+    if (error) {
+      console.error('Error inserting article:', error);
+    } else {
+      console.log('Article inserted:', data);
+      getArticles()
+      articleForm.reset()
+    }
+  })
+
+  const orderSelect = document.getElementById('order-select');
+  orderSelect.addEventListener('change', displayArticles);
+
+})
+
+
+
