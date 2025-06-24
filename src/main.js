@@ -12,6 +12,11 @@ async function getArticles() {
   let sortOrder = orderSelect ? orderSelect.value : 'created_at.desc';
   let [column, direction] = sortOrder.split('.');
 
+  if (!column || !direction || !['asc', 'desc'].includes(direction)) {
+    column = 'created_at';
+    direction = 'desc';
+  }
+
   let { data: article, error } = await supabase
     .from('article')
     .select('title', 'subtitle', 'author', 'created_at', 'content')
