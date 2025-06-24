@@ -1,7 +1,4 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = 'https://pvcimhnfgiravzozqtdq.supabase.co'
@@ -61,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   const orderSelect = document.getElementById('order-select');
-  orderSelect.addEventListener('change', displayArticles);
+  orderSelect.addEventListener('change', getArticles);
 
 })
 
